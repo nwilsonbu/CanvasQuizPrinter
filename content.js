@@ -9,8 +9,8 @@ async function main(){
    var quizID = params["quizID"]
    var schoolID = params["schoolID"]
 
-   //index 0  1           2             3    4       5   6  7
-   //https://school.instructure.com/courses/id/quizzes/id/take
+   //index 0  1           2             3    4          5   6  7
+   //https://school.instructure.com/courses/id/assignments/id/take
    var baseUrl = "https://" + schoolID + ".instructure.com/api/v1"
 
 
@@ -44,7 +44,7 @@ async function getQuestions(baseURL, courseID, quizID, questionsCount){
    let perPage = 10
    var pagesCount = Math.ceil(questionsCount / perPage)
    for(var page = 1; page <= pagesCount; page++){
-      let url = baseURL + "/courses/" + courseID + "/quizzes/" + quizID + "/questions?page=" + page + "&per_page=" + perPage
+      let url = baseURL + "/courses/" + courseID + "/assignments/" + quizID + "/questions?page=" + page + "&per_page=" + perPage
       urls.push(url)
    }
 
@@ -76,7 +76,7 @@ async function fetchQuestion(url){
 }
 
 async function getQuizHeader(baseURL, courseID, quizID){
-   var url = baseURL + "/courses/" + courseID + "/quizzes/" + quizID
+   var url = baseURL + "/courses/" + courseID + "/assignments/" + quizID
    return await fetch(url).then(r => r.text()).then(result => {
        var data = parseJSON(result);
        return data
